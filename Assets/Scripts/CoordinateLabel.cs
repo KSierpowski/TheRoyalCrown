@@ -22,6 +22,7 @@ public class CoordinateLabel : MonoBehaviour
         {
 
             DisplayCoordinates();
+            UpdateObjectName();
 
         }
     }
@@ -31,7 +32,10 @@ public class CoordinateLabel : MonoBehaviour
         coordinates.y = Mathf.RoundToInt(transform.parent.position.z / UnityEditor.EditorSnapSettings.move.z);
         label.text = coordinates.x + "," + coordinates.y;
     }
-
+    void UpdateObjectName()
+    {
+        transform.parent.name = coordinates.ToString();
+    }
 
 
 
