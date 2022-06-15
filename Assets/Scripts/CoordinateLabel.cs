@@ -7,13 +7,17 @@ using TMPro;
 [ExecuteAlways]  //bedzie dzialal w trybie gry i edycji
 public class CoordinateLabel : MonoBehaviour
 {
+    [SerializeField] Color defaultColor = Color.white;
+    [SerializeField] Color blockedColor = Color.grey;    
     TextMeshPro label;
     Vector2Int coordinates = new Vector2Int();
+    Waypoint waypoint;
 
 
     void Awake()
     {
         label = GetComponent<TextMeshPro>();
+        waypoint = GetComponentInParent<Waypoint>();
         DisplayCoordinates();
     }
     void Update()
@@ -24,6 +28,21 @@ public class CoordinateLabel : MonoBehaviour
             DisplayCoordinates();
             UpdateObjectName();
 
+        }
+
+        ColorCoordinates();
+
+    }
+
+    void ColorCoordinates()
+    {
+        if (waypoint.IsPlaceable)
+        {
+            label.color = defaultColor;
+        }
+        else
+        {
+            label.color = blockedColor;
         }
     }
     void DisplayCoordinates()
