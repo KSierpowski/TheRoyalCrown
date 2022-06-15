@@ -11,8 +11,28 @@ public class EnemyMover : MonoBehaviour
 
     void Start()
     {
+
+        FindPath();
         StartCoroutine(FollowPath());
+        ReturnToStart();
         
+    }
+
+    void FindPath()
+    {
+        path.Clear();   //jak znajdzie œcie¿ke to wyczyœci istniej¹c¹ i doda now¹
+
+        GameObject[] waypoints = GameObject.FindGameObjectsWithTag("Path");   //znajdzie to wsystko z tagiem path i umiesci w tablicy
+
+        foreach (GameObject waypoint in waypoints)        
+        {  
+            path.Add(waypoint.GetComponent<Waypoint>()); //doda go do listy 
+        }
+    }
+
+    void ReturnToStart()  //zawsze zacznie na pocz¹tku œcie¿ki
+    {
+        transform.position = path[0].transform.position;   
     }
     IEnumerator FollowPath()  
     { 
@@ -33,6 +53,8 @@ public class EnemyMover : MonoBehaviour
 
             
         }
+
+        Destroy(gameObject);
     }
 
 }
