@@ -5,35 +5,32 @@ using UnityEngine;
 public class EnemyMover : MonoBehaviour
 {
     [SerializeField] List<Waypoint> path = new List<Waypoint>();
-    [SerializeField] [Range(0f, 5f)] float speed = 1f;
+    [SerializeField][Range(0f, 5f)] float speed = 1f;
 
-
-
-    void Start()
+    void OnEnable ()
     {
-
         FindPath();
         ReturnToStart();
         StartCoroutine(FollowPath());
-        
     }
 
     void FindPath()
     {
-        path.Clear();   //jak znajdzie œcie¿ke to wyczyœci istniej¹c¹ i doda now¹
+        path.Clear();
 
-        GameObject[] waypoints = GameObject.FindGameObjectsWithTag("Path");   //znajdzie to wsystko z tagiem path i umiesci w tablicy
+        GameObject[] waypoints = GameObject.FindGameObjectsWithTag("Path");
 
-        foreach (GameObject waypoint in waypoints)        
-        {  
-            path.Add(waypoint.GetComponent<Waypoint>()); //doda go do listy 
+        foreach (GameObject waypoint in waypoints)
+        {
+            path.Add(waypoint.GetComponent<Waypoint>());
         }
     }
 
-    void ReturnToStart()  //zawsze zacznie na pocz¹tku œcie¿ki
+    void ReturnToStart()
     {
-        transform.position = path[0].transform.position;   
+        transform.position = path[0].transform.position;
     }
+
     IEnumerator FollowPath()
     {
         foreach (Waypoint waypoint in path)
@@ -56,5 +53,3 @@ public class EnemyMover : MonoBehaviour
     }
 
 }
-
-

@@ -8,7 +8,7 @@ public class EnemyHealth : MonoBehaviour
     int currentHP = 0;
 
 
-    private void Start()
+    void OnEnable()
     {
         currentHP = maxHP;
     }
