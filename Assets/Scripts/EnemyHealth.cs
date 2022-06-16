@@ -22,7 +22,7 @@ public class EnemyHealth : MonoBehaviour
     void ProcessHit()
     {
         currentHP--;
-        if(currentHP <= 0) { Destroy(gameObject); }
+        if(currentHP <= 0) { gameObject.SetActive(false); }
     }
 
 
