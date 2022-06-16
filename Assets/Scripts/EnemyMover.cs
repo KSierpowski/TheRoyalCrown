@@ -22,7 +22,11 @@ public class EnemyMover : MonoBehaviour
 
         foreach (GameObject waypoint in waypoints)
         {
-            path.Add(waypoint.GetComponent<Waypoint>());
+            if (waypoint != null)
+            {
+                path.Add(waypoint.GetComponent<Waypoint>());
+            }
+            
         }
     }
 
