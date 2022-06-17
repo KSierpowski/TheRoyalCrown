@@ -6,6 +6,8 @@ public class TargetLocator : MonoBehaviour
 {
     Transform target;
     [SerializeField] Transform weapon;
+    [SerializeField] float range = 15f;
+    [SerializeField] ParticleSystem projectileParticles;
 
 
 
@@ -35,11 +37,25 @@ public class TargetLocator : MonoBehaviour
     }
     void AimWeapon()
     {
+        float targetDistance = Vector3.Distance(transform.position, target.position);
+
         weapon.LookAt(target);
+
+        if (targetDistance < range)
+        {
+            Attack(true);
+        }
+        else {Attack(false);}
     }
 
 
+    void Attack(bool isActive)
+    {
+     
+            var emmisionModule = projectileParticles.emission;
+            emmisionModule.enabled = isActive;
 
+    }
 
 
 
